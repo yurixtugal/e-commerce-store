@@ -5,9 +5,10 @@ const StoreComponent = async ({ children }: { children: React.ReactNode }) => {
   const store = await getStore();
   return (
     <html lang="en">
-      <body>
+      <body className="h-screen">
         <NavBar store={store} />
-        {children}
+        <div className="flex flex-col h-full">{children}</div>
+        
       </body>
     </html>
   );

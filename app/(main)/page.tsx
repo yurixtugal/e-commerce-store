@@ -1,7 +1,21 @@
-import Image from 'next/image'
+import { getFeaturedProducts } from "@/actions/get-Products";
+import ProductCard from "@/components/cards/ProductCard";
+import ProductList from "@/components/product-list";
+import { Grid } from "lucide-react";
+import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+  const arrFeaturedProducts = await getFeaturedProducts();
+
+  console.log(arrFeaturedProducts);
+
   return (
-    <div className='xl:px-64 px-6 py-5'>Display store</div>
-  )
+    <>
+      <div className=" flex-1 px-7 py-5">
+        <div className="flex flex-col gap-y-8 px-4 ">
+          <ProductList title="Featured Products" items={arrFeaturedProducts} />
+        </div>
+      </div>
+    </>
+  );
 }
