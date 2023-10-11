@@ -20,10 +20,13 @@ interface ProductCard {
 
 import { useState } from "react";
 import { getDetColors, getSize } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const ProductNewCard = ({ data, showDetail }: ProductCard) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageHovered, setImageHovered] = useState(false);
+
+  const route = useRouter();
 
   const arrColors = getDetColors(data);
 
@@ -31,9 +34,10 @@ const ProductNewCard = ({ data, showDetail }: ProductCard) => {
 
   return (
     <Card
-      className="rounded-md shadow-lg hover:bg-gray-100 transition"
+      className="rounded-md shadow-lg hover:bg-gray-100 transition hover:shadow-xl hover:cursor-pointer"
       onMouseEnter={() => setImageHovered(true)}
       onMouseLeave={() => setImageHovered(false)}
+      onClick={() => route.push(`/product/${data.id}`)}
     >
       <CardContent className="p-3 ">
         <AspectRatio ratio={1}>
@@ -71,7 +75,7 @@ const ProductNewCard = ({ data, showDetail }: ProductCard) => {
             <div className="text-md text-gray-500 pt-2">
               {arrColors?.map((color) => (
                 <div key={`color_${data.id}`}
-                  className="w-4 h-4 rounded-full inline-block mr-1"
+                  className="w-6 h-6 rounded-full inline-block mr-1"
                   style={{ backgroundColor: color.value }}
                 ></div>
               ))}
