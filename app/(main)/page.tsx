@@ -1,6 +1,7 @@
 import { getFeaturedProducts } from "@/actions/get-Products";
 import ProductCard from "@/components/cards/ProductCard";
 import ProductList from "@/components/product-list";
+import ProductNewList from "@/components/product-new-list";
 import { Grid } from "lucide-react";
 import Image from "next/image";
 
@@ -13,7 +14,7 @@ export default async function Home() {
     <>
       <div className=" flex-1 px-7 py-5">
         <div className="flex flex-col gap-y-8 px-4 ">
-          <ProductList title="Featured Products" items={arrFeaturedProducts} />
+          <ProductNewList title="Featured Products" items={arrFeaturedProducts} />
         </div>
       </div>
     </>
