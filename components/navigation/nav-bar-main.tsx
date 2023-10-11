@@ -29,7 +29,7 @@ const NavBarMain = ( { arrCategories }: NavBarMainProps ) => {
           key={route.href}
           href={route.href}
           className={cn(
-            'text-sm font-medium transition-colors hover:text-black',
+            'text-md font-medium transition-colors hover:text-black',
             route.active ? 'text-black' : 'text-neutral-500'
           )}
         >

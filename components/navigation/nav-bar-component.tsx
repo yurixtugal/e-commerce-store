@@ -21,7 +21,7 @@ const NavBar = async ({ store }: NavBarProps) => {
         <NavLogoStore store={store}   />
         <NavBarMain arrCategories={arrCategories} />
         <div className="flex items-center ml-auto space-x-4">
-          <ShoppingCart className="h-6 sm:w-6 hover:text-gray-500 cursor-pointer transition duration-150 ease-in-out" />
+          <ShoppingCart className="h-7 w-7 hover:text-gray-500 cursor-pointer transition duration-150 ease-in-out" />
         </div>
       </div>
     </div>

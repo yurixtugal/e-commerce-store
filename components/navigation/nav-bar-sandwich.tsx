@@ -23,7 +23,7 @@ const NavBarSandwich = ({ store, arrCategories }: NavBarSandwichProps) => {
     <Sheet>
       <SheetTrigger asChild>
         <div className="flex sm:hidden items-center">
-          <MenuSquare className="h-6 w-6 hover:text-gray-500 cursor-pointer transition duration-150 ease-in-out" />
+          <MenuSquare className="h-7 w-7 hover:text-gray-500 cursor-pointer transition duration-150 ease-in-out" />
         </div>
       </SheetTrigger>
       <SheetContent side="left" className="w-[300px] sm:w-[540px]">
