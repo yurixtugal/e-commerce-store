@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { ReadonlyURLSearchParams } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -24,4 +25,30 @@ export const getSize = (product: Product) => {
     );
   }
   return null;
+};
+
+export const getAllVariantTypes = (product: Product) => {
+  if (product.isVariant){
+    return ["Color","Size"]
+  }
+  return [];
+}
+
+export const getValuesByOption = (product: Product, option: string) => {
+  if (product.isVariant) {
+    if (option === "Color") {
+      return getDetColors(product);
+    }
+    if (option === "Size") {
+      return getSize(product);
+    }
+  }
+  return null;
+}
+
+export const createUrl = (pathname: string, params: URLSearchParams | ReadonlyURLSearchParams) => {
+  const paramsString = params.toString();
+  const queryString = `${paramsString.length ? '?' : ''}${paramsString}`;
+
+  return `${queryString}`;
 };

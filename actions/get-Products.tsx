@@ -11,3 +11,8 @@ export const getProductsByCategory = async(idCategory : string): Promise<Product
   const arrProductsByCategory = await fetch(`${API_URL}/product/category/${idCategory}`,{cache: "no-cache"});
   return arrProductsByCategory.json();
 }
+
+export const getProductById = async(idProduct : string): Promise<Product> => {
+  const product = await fetch(`${API_URL}/product/${idProduct}`,{cache: "no-cache"});
+  return product.json();
+}
