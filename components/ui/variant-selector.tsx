@@ -31,26 +31,29 @@ const VariantSelector = ({ data }: VariantProps) => {
               </label>
             </div>
             <div key={`option_${option}`} className="flex flex-col mb-4">
-              <label
-                className="flex flex-row flex-wrap gap-4"
+              <div
+                className="flex flex-row flex-wrap gap-4 w-fit-content"
                 key={`value_${option}}`}
               >
                 {valuesByOption?.map((value) => {
                   const optionNameLowerCase = option.toLowerCase();
-                  // Base option params on current params so we can preserve any other param state in the url.
                   const optionSearchParams = new URLSearchParams(
                     searchParams.toString()
                   );
                   optionSearchParams.set(optionNameLowerCase, value.name);
                   const optionUrl = createUrl(pathname, optionSearchParams);
-                  const isActive = searchParams.get(optionNameLowerCase) === value.name;
+                  const isActive =
+                    searchParams.get(optionNameLowerCase) === value.name;
 
                   return (
                     <button
-                      className={cn("min-w-[70px] rounded-full border bg-neutral-100 px-2 py-1 text-md",{"ring-2 ring-black": isActive})}
+                      className={cn(
+                        "min-w-[70px] rounded-full border bg-neutral-100 px-2 py-1 text-md",
+                        { "ring-2 ring-black": isActive }
+                      )}
                       key={`button_${value.value}`}
                       onClick={() => {
-                        router.push(optionUrl,{scroll:false});
+                        router.push(optionUrl, { scroll: false });
                       }}
                     >
                       {option === "Color" ? (
@@ -69,7 +72,7 @@ const VariantSelector = ({ data }: VariantProps) => {
                     </button>
                   );
                 })}
-              </label>
+              </div>
             </div>
           </div>
         );
