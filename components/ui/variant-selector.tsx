@@ -2,6 +2,7 @@
 
 import { createUrl, getAllVariantTypes, getValuesByOption } from "@/lib/utils";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface VariantProps {
   data: Product;
@@ -18,9 +19,7 @@ const VariantSelector = ({ data }: VariantProps) => {
     <>
       {options.map((option) => {
         const valuesByOption = getValuesByOption(data, option);
-        const optionNameLowerCase = option.toLowerCase();
-        // Base option params on current params so we can preserve any other param state in the url.
-        const optionSearchParams = new URLSearchParams(searchParams.toString());
+
         return (
           <div key={"blank" + option}>
             <div key={option} className="flex flex-col mb-4">
@@ -37,14 +36,21 @@ const VariantSelector = ({ data }: VariantProps) => {
                 key={`value_${option}}`}
               >
                 {valuesByOption?.map((value) => {
+                  const optionNameLowerCase = option.toLowerCase();
+                  // Base option params on current params so we can preserve any other param state in the url.
+                  const optionSearchParams = new URLSearchParams(
+                    searchParams.toString()
+                  );
                   optionSearchParams.set(optionNameLowerCase, value.name);
+                  const optionUrl = createUrl(pathname, optionSearchParams);
+                  const isActive = searchParams.get(optionNameLowerCase) === value.name;
 
                   return (
                     <button
-                      className="min-w-[70px] rounded-full border bg-neutral-100 px-2 py-1 text-md"
+                      className={cn("min-w-[70px] rounded-full border bg-neutral-100 px-2 py-1 text-md",{"ring-2 ring-black": isActive})}
                       key={`button_${value.value}`}
                       onClick={() => {
-                        router.push(pathname + "?a=a");
+                        router.push(optionUrl,{scroll:false});
                       }}
                     >
                       {option === "Color" ? (

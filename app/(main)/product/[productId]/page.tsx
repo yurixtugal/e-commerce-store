@@ -1,9 +1,6 @@
 
 import { getProductById } from "@/actions/get-Products";
 import ProductCardDetail from "@/components/ui/product-card-detail";
-import Image from "next/image";
-import { useParams } from "next/navigation";
-import { useState } from "react";
 
 const ProductDetail = async ( {params}:{params: {productId: string}}) => {
   

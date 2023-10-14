@@ -40,9 +40,6 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
   return (
     <Card
       className="rounded-md shadow-lg"
-      onMouseEnter={() => setImageHovered(true)}
-      onMouseLeave={() => setImageHovered(false)}
-      onClick={() => route.push(`/product/${data.id}`)}
     >
       <CardContent className="p-3 grid grid-cols-1 md:grid-cols-2">
       <AspectRatio ratio={1}>
