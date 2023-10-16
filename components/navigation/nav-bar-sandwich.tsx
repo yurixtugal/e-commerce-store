@@ -1,16 +1,21 @@
-"use client"
+"use client";
 
 import { MenuSquare } from "lucide-react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import NavLogoStore from "./nav-logo-store";
 import NavBarMainVertical from "./nav-bar-main-vertical";
+import { Button } from "../ui/button";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 interface NavBarSandwichProps {
   store: Store;
@@ -18,7 +23,15 @@ interface NavBarSandwichProps {
 }
 
 const NavBarSandwich = ({ store, arrCategories }: NavBarSandwichProps) => {
+  const pathname = usePathname();
 
+  const routes = arrCategories.map((category) => ({
+    label: category.name,
+    href: `/category/${category.id}`,
+    active: pathname === `/category/${category.id}`,
+  }));
+
+  console.log(routes);
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -28,9 +41,25 @@ const NavBarSandwich = ({ store, arrCategories }: NavBarSandwichProps) => {
       </SheetTrigger>
       <SheetContent side="left" className="w-[300px] sm:w-[540px]">
         <SheetHeader>
-          <SheetTitle className="pb-8"><NavLogoStore store={store}  /></SheetTitle>
-          <NavBarMainVertical arrCategories={arrCategories}/>
+          <SheetTitle className="pb-8">
+            <NavLogoStore store={store} />
+          </SheetTitle>
         </SheetHeader>
+        <SheetFooter>
+          <nav className="flex flex-col items-start space-y-4 mr-auto">
+            {routes.map((route) => (
+              <SheetClose key={"close_" + route.href} asChild>
+                <Link
+                  key={"link"+route.href}
+                  href={route.href}
+                  className="text-base font-medium text-neutral-500 transition-colors hover:text-black"
+                >
+                  {route.label}
+                </Link>
+              </SheetClose>
+            ))}
+          </nav>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
