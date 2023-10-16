@@ -26,8 +26,10 @@ import { Button } from "./button";
 import { Plus, ShoppingBag, ShoppingBasket, ShoppingCart } from "lucide-react";
 import { Badge } from "./badge";
 import VariantSelector from "./variant-selector";
+import { CartShooping, useCartShooping } from "@/hooks/use-car-shooping";
 
 const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
+
   const [imageLoaded, setImageLoaded] = useState(false);
   showDetail = true;
   const router = useRouter();
@@ -35,6 +37,33 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
   const searchParams = useSearchParams();
   const strIndex = searchParams.get("index");
   const currentIndex = strIndex ? parseInt(strIndex) : 0;
+  const cart = useCartShooping();
+  const addNewItem = () => {
+    const isVariants = data.isVariant;
+    if (isVariants) {
+      const arrColor = getDetColors(data);
+      const arrSize = getSize(data);
+      const currentColor = searchParams.get("color");
+      const currentSize = searchParams.get("size");
+      const idCurrentColor = arrColor?.find((item) => item.name === currentColor)?.id;
+      const idCurrentSize = arrSize?.find((item) => item.name === currentSize)?.id;
+      const productCart = {
+        product: data.id,
+        quantity: 1,
+        size: idCurrentSize,
+        color: idCurrentColor,
+      }
+      cart.addItem(productCart)
+    }else{
+
+      const productCart = {
+        product: data.id,
+        quantity: 1
+      }
+      cart.addItem(productCart)
+
+    }
+  }
 
   return (
     <Card
@@ -72,7 +101,7 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
           <VariantSelector data={data} />
                 
           <div className="pt-5 flex w-96 mb-5">
-              <Button className="text-md"><span >Add to Cart</span> <ShoppingCart className="ml-2" size={20} /></Button>
+              <Button className="text-md" onClick={addNewItem}><span >Add to Cart</span> <ShoppingCart className="ml-2" size={20} /></Button>
           </div>
           
           <div className={cn("order-first md:order-last pb-5",data.images.length<=1?"hidden":"")}>
