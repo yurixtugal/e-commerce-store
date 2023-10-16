@@ -19,7 +19,7 @@ interface ProductCard {
 }
 
 import { useState } from "react";
-import { cn, getDetColors, getSize } from "@/lib/utils";
+import { cn, createUrl, getDetColors, getSize } from "@/lib/utils";
 import { useRouter,usePathname, useSearchParams } from "next/navigation";
 import { Separator } from "./separator";
 import { Button } from "./button";
@@ -30,10 +30,11 @@ import VariantSelector from "./variant-selector";
 const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   showDetail = true;
-  const route = useRouter();
-
+  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const strIndex = searchParams.get("index");
+  const currentIndex = strIndex ? parseInt(strIndex) : 0;
 
   return (
     <Card
@@ -47,7 +48,7 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
             } transition-opacity duration-500`}
           >
             <Image
-              src={data.images?.[0]?.imageUrl}
+              src={data.images?.[currentIndex]?.imageUrl}
               alt={data.name} 
               fill
               className={`rounded-md object-cover w-full h-full scale-95 ring-2 ring-black`}
@@ -76,17 +77,26 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
           
           <div className={cn("order-first md:order-last pb-5",data.images.length<=1?"hidden":"")}>
             <ul className="flex space-x-5">
-              {data.images?.map((image, index) => (
-                <li key={index} className="border rounded-md">
+              {data.images?.map((image, index) => {
+                const optionSearchParams = new URLSearchParams(
+                  searchParams.toString()
+                );
+                optionSearchParams.set("index", index.toString());
+                const optionUrl = createUrl(pathname, optionSearchParams);
+
+                return (<li key={index} className="border rounded-md hover:cursor-pointer" onClick={() => {
+                  
+                  router.replace(optionUrl, { scroll: false })
+                }}>
                   <Image
                     src={image.imageUrl}
                     alt={data.name}
-                    width={80}
-                    height={80}
-                    className="rounded-md object-cover ring-2 ring-black "
+                    width={100}
+                    height={100}
+                    className={cn("rounded-md object-cover",currentIndex===index?"ring-2 ring-black":"opacity-60")}
                   />
                 </li>
-              ))}
+              )})}
             </ul>
           </div>
 
