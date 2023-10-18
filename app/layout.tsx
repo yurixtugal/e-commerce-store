@@ -1,17 +1,17 @@
-import { getStore } from '@/actions/get-store';
-import './globals.css'
-import NavBar from '@/components/navigation/nav-bar-component';
+import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
-export default  function RootLayout({
+export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body >
+      <body>
+        <Toaster />
         {children}
       </body>
     </html>
-  )
+  );
 }

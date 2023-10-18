@@ -27,9 +27,10 @@ import { Plus, ShoppingBag, ShoppingBasket, ShoppingCart } from "lucide-react";
 import { Badge } from "./badge";
 import VariantSelector from "./variant-selector";
 import { CartShooping, useCartShooping } from "@/hooks/use-car-shooping";
+import { useToast } from "./use-toast";
 
 const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
-
+  const { toast } = useToast()
   const [imageLoaded, setImageLoaded] = useState(false);
   showDetail = true;
   const router = useRouter();
@@ -48,16 +49,29 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
       const idCurrentColor = arrColor?.find((item) => item.name === currentColor)?.id;
       const idCurrentSize = arrSize?.find((item) => item.name === currentSize)?.id;
       const productCart = {
-        product: data.id,
+        product: data,
         quantity: 1,
         size: idCurrentSize,
         color: idCurrentColor,
       }
-      cart.addItem(productCart)
+      const isItemAdded = cart.addItem(productCart)
+      if (isItemAdded){
+        toast({
+          title: "Item added",
+          description: "Item added to cart",
+          variant: "default"
+        })
+      }else{
+        toast({
+          title: "Item already added",
+          description: "Item already added to cart",
+          variant: "destructive"
+        })
+      }
     }else{
 
       const productCart = {
-        product: data.id,
+        product: data,
         quantity: 1
       }
       cart.addItem(productCart)
