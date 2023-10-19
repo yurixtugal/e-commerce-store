@@ -74,7 +74,20 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
         product: data,
         quantity: 1
       }
-      cart.addItem(productCart)
+      const isItemAdded = cart.addItem(productCart)
+      if (isItemAdded){
+        toast({
+          title: "Item added",
+          description: "Item added to cart",
+          variant: "default"
+        })
+      }else{
+        toast({
+          title: "Item already added",
+          description: "Item already added to cart",
+          variant: "destructive"
+        })
+      }
 
     }
   }
