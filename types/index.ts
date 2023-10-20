@@ -1,6 +1,7 @@
 type Store = {
   id: string;
   name: string;
+  backgroundImageUrl: string;
   createdAt: Date;
   updatedAt: Date;
 }
