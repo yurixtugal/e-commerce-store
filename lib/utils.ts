@@ -40,7 +40,7 @@ export const getValuesByOption = (product: Product, option: string) => {
       return getDetColors(product);
     }
     if (option === "Size") {
-      return getSize(product);
+      return getSize(product)?.sort((a, b) => a.order - b.order);
     }
   }
   return null;
