@@ -2,6 +2,7 @@ type Store = {
   id: string;
   name: string;
   backgroundImageUrl: string;
+  logoImageUrl: string;
   createdAt: Date;
   updatedAt: Date;
 }

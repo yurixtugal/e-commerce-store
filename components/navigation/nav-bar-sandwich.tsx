@@ -31,11 +31,10 @@ const NavBarSandwich = ({ store, arrCategories }: NavBarSandwichProps) => {
     active: pathname === `/category/${category.id}`,
   }));
 
-  console.log(routes);
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div className="flex sm:hidden items-center">
+        <div className="flex md:hidden items-center">
           <MenuSquare className="h-7 w-7 hover:text-gray-500 cursor-pointer transition duration-150 ease-in-out" />
         </div>
       </SheetTrigger>

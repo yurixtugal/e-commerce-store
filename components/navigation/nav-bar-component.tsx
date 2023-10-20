@@ -14,7 +14,7 @@ const NavBar = async ({ store }: NavBarProps) => {
   
   return (
     <div className="border-b">
-      <div className="flex xl:px-64 lg:px-32 px-6 h-16">
+      <div className="flex xl:px-64 lg:px-32 px-6 h-20">
         <NavBarSandwich store={store} arrCategories={arrCategories} />
         <NavLogoStore store={store} />
         <NavBarMain arrCategories={arrCategories} />

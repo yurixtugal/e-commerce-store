@@ -22,14 +22,14 @@ const NavBarMain = ( { arrCategories }: NavBarMainProps ) => {
   return (
     <>
     <nav
-      className="hidden sm:flex items-center space-x-4 ml-4"
+      className="hidden md:flex items-center space-x-4 ml-10"
     >
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            'text-md font-medium transition-colors hover:text-black',
+            'text-lg font-medium transition-colors hover:text-black',
             route.active ? 'text-black' : 'text-neutral-500'
           )}
         >
