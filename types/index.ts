@@ -68,3 +68,14 @@ type VariantProduct = {
   Size: Size;
   Color: Color;  
 }
+
+type Pagination = {
+  currentPage: number;
+  total: number;
+  lastPage: number;
+}
+
+type ProductAndPagination = {
+  data: Product[];
+  pagination: Pagination;
+}
