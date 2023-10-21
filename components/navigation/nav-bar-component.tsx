@@ -13,7 +13,7 @@ interface NavBarProps {
 const NavBar = async ({ store, arrCategories }: NavBarProps) => {
   
   return (
-    <div className="border-b">
+    <div className="border-b bg-[#fff]">
       <div className="flex xl:px-64 lg:px-32 px-6 h-20">
         <NavBarSandwich store={store} arrCategories={arrCategories} />
         <NavLogoStore store={store} />
