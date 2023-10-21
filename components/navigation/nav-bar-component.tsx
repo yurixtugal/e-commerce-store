@@ -7,10 +7,10 @@ import { useCartShooping } from "@/hooks/use-car-shooping";
 
 interface NavBarProps {
   store: Store;
+  arrCategories: Category[];
 }
 
-const NavBar = async ({ store }: NavBarProps) => {
-  const arrCategories = await getCategories();
+const NavBar = async ({ store, arrCategories }: NavBarProps) => {
   
   return (
     <div className="border-b">

@@ -3,6 +3,14 @@ type Store = {
   name: string;
   backgroundImageUrl: string;
   logoImageUrl: string;
+  description: string;
+  address: string;
+  fbLink: string;
+  igLink: string;
+  xLink: string;
+  tiktokLink: string;
+  phoneSupport: string;
+  emailSupport: string;
   createdAt: Date;
   updatedAt: Date;
 }
