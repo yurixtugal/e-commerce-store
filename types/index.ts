@@ -11,6 +11,7 @@ type Store = {
   tiktokLink: string;
   phoneSupport: string;
   emailSupport: string;
+  showWhatsapp: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

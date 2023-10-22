@@ -9,7 +9,7 @@ interface BackGroundImageStoreProps {
 
 const BackGroundImageStore = ({ currentStore }: BackGroundImageStoreProps) => {
   return (
-    <AspectRatio ratio={16 / 8} >
+    <AspectRatio ratio={16 / 7}>
       <Image src={currentStore.backgroundImageUrl} fill alt="Background" />
     </AspectRatio>
     );

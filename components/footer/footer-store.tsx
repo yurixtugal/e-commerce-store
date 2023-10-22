@@ -10,7 +10,7 @@ interface FooterProps {
 const Footer = ({ store, arrCategories }: FooterProps) => {
   return (
     <footer className="pt-8">
-      <div className="bg-[#fff] hidden md:flex md:flex-row justify-center py-4">
+      <div className="bg-white hidden md:flex md:flex-row justify-center py-4">
         <div className="md:basis-1/4 xl:pl-24 lg:pl-14 pl-6">
           <Image
             src={store.logoImageUrl}
@@ -59,7 +59,7 @@ const Footer = ({ store, arrCategories }: FooterProps) => {
           </ul>
         </div>
       </div>
-      <div className="md:hidden bg-[#fff] ">
+      <div className="md:hidden bg-white ">
         <div className="md:basis-1/4 xl:pl-24 lg:pl-14 pl-11 pr-11 pt-7 pb-3">
           <Image
             src={store.logoImageUrl}
@@ -72,7 +72,7 @@ const Footer = ({ store, arrCategories }: FooterProps) => {
         </div>
       </div>
 
-      <div className="bg-[#fff] md:hidden flex flex-row justify-center py-4">
+      <div className="bg-white md:hidden flex flex-row justify-center py-4">
         <div className="basis-1/2 pl-11">
           <div className="font-bold text-xl pb-2">Categories</div>
           <ul>
@@ -92,7 +92,7 @@ const Footer = ({ store, arrCategories }: FooterProps) => {
           </ul>
         </div>
       </div>
-      <div className="bg-[#fff] md:hidden flex flex-col justify-center px-11">
+      <div className="bg-white md:hidden flex flex-col justify-center px-11">
         <div className="font-bold text-xl pb-4 ">Contact</div>
         <ul>
           <li className="py-1">{store.address}</li>

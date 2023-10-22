@@ -1,12 +1,7 @@
 import { getFeaturedProducts } from "@/actions/get-Products";
 import { getStore } from "@/actions/get-store";
 import BackGroundImageStore from "@/components/background-image-store";
-import ProductCard from "@/components/cards/ProductCard";
-import ProductList from "@/components/product-list";
 import ProductNewList from "@/components/product-new-list";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { Grid } from "lucide-react";
-import Image from "next/image";
 
 export default async function Home() {
   const arrFeaturedProducts = await getFeaturedProducts();
