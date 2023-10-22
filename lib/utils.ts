@@ -22,7 +22,7 @@ export const getSize = (product: Product) => {
     const sizes = product.variants.map((variant) => variant.Size);
     return sizes.filter(
       (size, index) => sizes.map((size) => size.id).indexOf(size.id) === index
-    );
+    )?.sort((a, b) => a.order - b.order);
   }
   return null;
 };

@@ -63,16 +63,16 @@ const ProductNewCard = ({ data, showDetail }: ProductCard) => {
           )}
         </AspectRatio>
         <div className="pt-3">
-          <div className="font-semibold text-lg">{data.name}</div>
-          <div className="text-md text-gray-500">{data.Category?.name}</div>
+          <div className="font-semibold text-xl">{data.name}</div>
+          <div className="text-gray-500 pt-1.5">{data.Category?.name}</div>
           {showDetail && data.isVariant && (
-            <div className="text-md text-gray-500 pt-2">
+            <div className="text-md text-gray-500 pt-1.5">
               {arrSizes?.map((size) => size.value).join(", ")}
             </div>
           )}
 
           {showDetail && data.isVariant && (
-            <div className="text-md text-gray-500 pt-2">
+            <div className=" text-gray-500 pt-1.5">
               {arrColors?.map((color) => (
                 <div key={`color_${data.id}`}
                   className="w-6 h-6 rounded-full inline-block mr-1"
@@ -81,7 +81,7 @@ const ProductNewCard = ({ data, showDetail }: ProductCard) => {
               ))}
             </div>
           )}
-          <div className="font-semibold text-lg pt-4">
+          <div className="font-semibold text-xl pt-3">
             S/. {data.basePrice}{" "}
           </div>
         </div>

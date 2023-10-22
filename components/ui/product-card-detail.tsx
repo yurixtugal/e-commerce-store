@@ -46,6 +46,14 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
       const arrSize = getSize(data);
       const currentColor = searchParams.get("color");
       const currentSize = searchParams.get("size");
+      if (!currentColor || !currentSize) {
+        toast({
+          title: "Select a color and size",
+          description: "Please select a color and size",
+          variant: "destructive"
+        })
+        return;
+      }
       const idCurrentColor = arrColor?.find((item) => item.name === currentColor)?.id;
       const idCurrentSize = arrSize?.find((item) => item.name === currentSize)?.id;
       const productCart = {
@@ -120,18 +128,18 @@ const ProductCardDetail = ({ data, showDetail }: ProductCard) => {
         </AspectRatio>
         
         <div className="pt-5 pr-5 pb-5 pl-[8px] sm:pl-5 flex flex-col">
-          <div className="mb-5 text-3xl sm:text-3xl md:text-3xl lg:text-4xl font-bold">{data.name} - {data.Category.name}</div>
-          <div className="mb-5 text-2xl sm:text-2xl md:text-2xl lg:text-3xl font-medium text-gray-500">
+          <div className="mb-3 text-2xl  lg:text-3xl font-bold">{data.name} - {data.Category.name}</div>
+          <div className="mb-1.5 text-xl sm:text-2xl font-medium text-gray-500">
           S./ {data.basePrice} 
           </div> 
-          <Separator className="mb-5 h-[3px]" />
+          <Separator className="mb-3 h-[3px]" />
           <VariantSelector data={data} />
                 
-          <div className="pt-5 flex w-96 mb-5">
-              <Button className="text-md" onClick={addNewItem}><span >Add to Cart</span> <ShoppingCart className="ml-2" size={20} /></Button>
+          <div className="pt-3.5 flex w-96 mb-5">
+              <Button className="text-lg" onClick={addNewItem}><span >Add to Cart</span> <ShoppingCart className="ml-2" size={20} /></Button>
           </div>
           
-          <div className={cn("order-first md:order-last pb-5",data.images.length<=1?"hidden":"")}>
+          <div className={cn("order-first md:order-last pt-3.5",data.images.length<=1?"hidden":"")}>
             <ul className="flex space-x-5">
               {data.images?.map((image, index) => {
                 const optionSearchParams = new URLSearchParams(

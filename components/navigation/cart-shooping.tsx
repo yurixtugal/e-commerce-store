@@ -23,11 +23,34 @@ import Image from "next/image";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 
+const getPrice = (product: Product, color: string, size: string) => {
+  const isVariant = product.isVariant;
+  const currentVariant = isVariant
+    ? product.variants.find(
+        (variant) => variant.Color.id === color && variant.Size.id === size
+      )
+    : null;
+  const currentPrice = isVariant ? currentVariant?.price : product.basePrice;
+  return currentPrice;
+};
+
 const CartShooping = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const useCart = useCartShooping();
   const items = useCart.items;
   const quantity = items.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = items.reduce((acc, item) => {
+    console.log(acc);
+    let currentPrice = getPrice(
+      item.product,
+      item.color ? item.color : "",
+      item.size ? item.size : ""
+    );
+    console.log(currentPrice);
+    let currentQuantity = item.quantity;
+    return acc + (currentPrice ? currentPrice : 0) * currentQuantity;
+  }, 0);
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -55,24 +78,19 @@ const CartShooping = () => {
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>My Cart</SheetTitle>
+            <SheetTitle className="text-lg">My Cart</SheetTitle>
             <SheetDescription>
               <div className="flex flex-col">
                 {items.map((item) => {
                   const isVariant = item.product.isVariant;
-                  console.log(isVariant);
                   const colors = getDetColors(item.product);
                   const sizes = getSize(item.product);
-                  console.log(item.size);
-                  console.log(item.color);
                   const currentColor = colors?.find(
                     (color) => color.id === item.color
                   );
-                  console.log(currentColor);
                   const currentSize = sizes?.find(
                     (size) => size.id === item.size
                   );
-                  console.log(currentColor);
                   const currentVariant = isVariant
                     ? item.product.variants.find(
                         (variant) =>
@@ -102,7 +120,7 @@ const CartShooping = () => {
                             {item.product.name}
                           </span>
                           {item.product.isVariant && (
-                            <span>
+                            <span className="text-sm">
                               {currentColor?.name} / {currentSize?.name}
                             </span>
                           )}
@@ -146,20 +164,28 @@ const CartShooping = () => {
                   );
                 })}
               </div>
+
               {items && items.length > 0 && (
-                <>
-                  <Button className="w-full mb-4">Checkout</Button>
+                <div className="flex flex-col justify-end" >
+                  <div className="flex justify-between mb-3">
+                    <span className="font-semibold text-black text-lg">
+                      Total
+                    </span>
+                    <span className="font-semibold text-black  text-lg">
+                      S./ {totalPrice && totalPrice.toFixed(2)}
+                    </span>
+                  </div>
+                  <Button className="w-full mb-3 text-lg">Checkout</Button>
 
                   <Button
-                    className="w-full"
+                    className="w-full text-lg"
                     variant="outline"
                     onClick={() => useCart.reset()}
                   >
                     Clear Cart
                   </Button>
-                </>
+                </div>
               )}
-
               {items && items.length === 0 && (
                 <div className="mt-4 flex flex-col items-center justify-center text-black">
                   <ShoppingCart className="h-20 w-20 mb-5" />

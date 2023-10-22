@@ -22,7 +22,7 @@ const VariantSelector = ({ data }: VariantProps) => {
 
         return (
           <div key={"blank" + option}>
-            <div key={option} className="flex flex-col mb-4">
+            <div key={option} className="flex flex-col mb-3.5">
               <label
                 key={"option_2" + option}
                 className="text-lg sm:text-xl font-semibold"
@@ -30,7 +30,7 @@ const VariantSelector = ({ data }: VariantProps) => {
                 {option}
               </label>
             </div>
-            <div key={`option_${option}`} className="flex flex-col mb-4">
+            <div key={`option_${option}`} className="flex flex-col mb-3.5">
               <div
                 className="flex flex-row flex-wrap gap-4 w-fit-content"
                 key={`value_${option}}`}

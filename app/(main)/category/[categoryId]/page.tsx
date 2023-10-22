@@ -58,10 +58,10 @@ export default function ProductByCategory({
               Category - {category.name}
             </h3>
             <div className="flex justify-between">
-              <div className="text-muted-foreground text-md">
+              <div className="text-muted-foreground">
                 Filter: Comming soon
               </div>
-              <div className="text-muted-foreground text-md">
+              <div className="text-muted-foreground">
                 {arrProductsByCategory.pagination.total} Products
               </div>
             </div>
